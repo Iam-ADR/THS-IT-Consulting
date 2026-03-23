@@ -7,13 +7,14 @@ export default function ApplyPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
     setError("");
 
-    const formData = new FormData(e.target);
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
     try {
       const res = await fetch("/api/apply", {
@@ -23,7 +24,7 @@ export default function ApplyPage() {
 
       if (res.ok) {
         setSuccess(true);
-        e.target.reset();
+        form.reset();
       } else {
         setError("Failed to submit application");
       }

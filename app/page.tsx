@@ -199,45 +199,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CAREERS */}
-      <section id="careers" className="py-24 bg-white text-[#1F2937]">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-12 text-[#1E3A8A]">Careers at THS Consulting</h2>
+{/* CAREERS */}
+<section id="careers" className="py-24 bg-white text-[#1F2937]">
+  <div className="max-w-7xl mx-auto px-6">
+    <h2 className="text-3xl font-bold mb-12 text-[#1E3A8A]">Careers at THS Consulting</h2>
 
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-[#1E3A8A]">Join Our Talent Network</h3>
-              <p className="text-[#4B5563] mb-4">
-                We’re always looking for skilled developers, analysts, testers, and cloud engineers.
-              </p>
-              <ul className="text-[#4B5563] space-y-2">
-                <li>• Full‑stack Developers</li>
-                <li>• QA & Automation Engineers</li>
-                <li>• Data Analysts & BI Developers</li>
-                <li>• Cloud & DevOps Engineers</li>
-                <li>• Business Analysts & PMs</li>
-              </ul>
-            </div>
+    <div className="grid md:grid-cols-2 gap-10">
 
-            <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-3 text-[#1E3A8A]">Why Work With Us</h3>
-              <p className="text-[#4B5563] mb-4">
-                Flexible engagements, competitive compensation, and opportunities across industries.
-              </p>
-              <p className="text-[#4B5563] mb-6">
-                Submit your resume and we’ll reach out when a matching opportunity becomes available.
-              </p>
+      {/* FIRST: WHY WORK WITH US */}
+      <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-sm">
+        <h3 className="text-xl font-semibold mb-3 text-[#1E3A8A]">Why Work With Us</h3>
+<ul className="text-[#4B5563] space-y-2 mb-4">
+  <li>• Flexible engagements, competitive compensation, and opportunities across diverse industries.</li>
+  <li>• Modern engineering standards, strong technical leadership, and a culture of continuous improvement.</li>
+  <li>• Long‑term relationships built on transparency, trust, and meaningful career growth.</li>
+</ul>
+      </div>
 
-              {/* APPLY BUTTON */}
-              <a href="/apply">
-                <button className="bg-[#1E3A8A] text-white px-6 py-3 rounded-full hover:bg-[#162F6B] transition">
-                  Apply
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* SECOND: JOIN OUR TALENT NETWORK */}
+      <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl shadow-sm">
+        <h3 className="text-xl font-semibold mb-3 text-[#1E3A8A]">Join Our Talent Network</h3>
+        <p className="text-[#4B5563] mb-4">
+          We’re always looking for skilled developers, analysts, testers, and cloud engineers.
+        </p>
+
+        <ul className="text-[#4B5563] space-y-2 mb-6">
+          <li>• Full‑stack Developers</li>
+          <li>• QA & Automation Engineers</li>
+          <li>• Data Analysts & BI Developers</li>
+          <li>• Cloud & DevOps Engineers</li>
+          <li>• Business Analysts & PMs</li>
+        </ul>
+
+        {/* APPLY BUTTON */}
+        <a href="/apply">
+          <button className="bg-[#1E3A8A] text-white px-6 py-3 rounded-full hover:bg-[#162F6B] transition">
+            Apply
+          </button>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* CONTACT MODAL */}
       {showContact === "contact" && (
@@ -259,6 +264,24 @@ export default function Home() {
           </div>
         </div>
       )}
+      {/* CONTACT SECTION */}
+<section id="contact" className="py-20 bg-[#F8FAFC] text-[#1F2937]">
+  <div className="max-w-4xl mx-auto px-6 text-center">
+    <h2 className="text-3xl font-bold mb-6 text-[#1E3A8A]">Get in Touch</h2>
+
+    <p className="text-[#4B5563] mb-8">
+      Whether you're exploring opportunities or want to learn more about our services, 
+      our team is here to help. Reach out anytime - we would love to connect.
+    </p>
+
+    <div className="inline-block text-left bg-white p-8 rounded-2xl shadow-sm border border-[#E2E8F0]">
+      <p className="text-[#1E3A8A] font-semibold text-lg mb-2">THS Consulting</p>
+
+      <p className="text-[#4B5563]"><strong>Email:</strong> contact@thsitconsulting.com</p>
+      <p className="text-[#4B5563] mb-4"><strong>Phone:</strong> 818‑588‑6061</p>
+    </div>
+  </div>
+</section>
 
     </main>
   );
