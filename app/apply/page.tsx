@@ -22,11 +22,13 @@ export default function ApplyPage() {
         body: formData,
       });
 
+      const data = await res.json().catch(() => null);
+
       if (res.ok) {
         setSuccess(true);
         form.reset();
       } else {
-        setError("Failed to submit application");
+        setError(data?.error || "Failed to submit application");
       }
     } catch (err) {
       setError("Something went wrong");
@@ -45,7 +47,6 @@ export default function ApplyPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
 
-          {/* FULL NAME */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Full Name</label>
             <input
@@ -56,7 +57,6 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* EMAIL */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Email</label>
             <input
@@ -68,7 +68,6 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* PHONE */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Phone Number</label>
             <input
@@ -79,7 +78,6 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* LOCATION */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Current Location</label>
             <input
@@ -90,7 +88,6 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* OPEN TO RELOCATE */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Open to Relocate</label>
             <select
@@ -104,7 +101,6 @@ export default function ApplyPage() {
             </select>
           </div>
 
-          {/* EXPECTED PAY */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Expected Pay (per hour)</label>
             <input
@@ -115,7 +111,6 @@ export default function ApplyPage() {
             />
           </div>
 
-          {/* RESUME UPLOAD */}
           <div>
             <label className="block mb-1 font-semibold text-[#222]">Upload Resume</label>
             <input
@@ -130,7 +125,6 @@ export default function ApplyPage() {
             </p>
           </div>
 
-          {/* SUBMIT BUTTON */}
           <button
             type="submit"
             disabled={loading}
@@ -139,7 +133,6 @@ export default function ApplyPage() {
             {loading ? "Submitting..." : "Submit Application"}
           </button>
 
-          {/* SUCCESS / ERROR */}
           {success && (
             <p className="text-green-600 font-medium text-center">
               Application submitted successfully!

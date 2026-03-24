@@ -1,32 +1,26 @@
 import nodemailer from "nodemailer";
-import formidable from "formidable";
-import fs from "fs";
 
-export const config = {
-  api: {
-    bodyParser: false, // REQUIRED for formidable
-  },
-};
+export async function POST(req) {
+  try {
+    const formData = await req.formData();
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const phone = formData.get("phone");
+    const location = formData.get("location");
+    const relocate = formData.get("relocate");
+    const expectedPay = formData.get("expectedPay");
+    const resume = formData.get("resume");
 
-  const form = formidable({ multiples: false });
-
-  form.parse(req, async (err, fields, files) => {
-    if (err) {
-      return res.status(500).json({ error: "Form parsing error" });
+    if (!resume) {
+      return Response.json({ error: "Resume missing" }, { status: 400 });
     }
 
-    const { name, email, phone, location, relocate, expectedPay } = fields;
-    const resume = files.resume;
+    const resumeBuffer = Buffer.from(await resume.arrayBuffer());
 
-    // SMTP setup
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: 465,
+      port: Number(process.env.SMTP_PORT),
       secure: true,
       auth: {
         user: process.env.SMTP_USER,
@@ -34,9 +28,10 @@ export default async function handler(req, res) {
       },
     });
 
-    const mailOptions = {
-      from: `"THS Consulting Careers" <${process.env.SMTP_USER}>`,
-      to: "contact@thsitconsulting.com",
+    await transporter.sendMail({
+      from: `"THS IT Consulting" <${process.env.SMTP_USER}>`,
+      to: process.env.SMTP_USER,
+      replyTo: email,
       subject: `New Application from ${name}`,
       html: `
         <h2>New Candidate Application</h2>
@@ -47,22 +42,20 @@ export default async function handler(req, res) {
         <p><strong>Open to Relocate:</strong> ${relocate}</p>
         <p><strong>Expected Pay:</strong> ${expectedPay}</p>
       `,
-      attachments: resume
-        ? [
-            {
-              filename: resume.originalFilename,
-              content: fs.createReadStream(resume.filepath),
-            },
-          ]
-        : [],
-    };
+      attachments: [
+        {
+          filename: resume.name,
+          content: resumeBuffer,
+        },
+      ],
+    });
 
-    try {
-      await transporter.sendMail(mailOptions);
-      return res.status(200).json({ success: true });
-    } catch (error) {
-      console.error("Email error:", error);
-      return res.status(500).json({ error: "Email failed" });
-    }
-  });
+    return Response.json({ message: "Application submitted successfully" });
+  } catch (error) {
+    console.error("🔥 BACKEND ERROR:", error);
+    return Response.json(
+      { error: "Email sending failed", details: error.message },
+      { status: 500 }
+    );
+  }
 }
