@@ -21,7 +21,7 @@ export default function Home() {
 />
 
             <span className="text-2xl font-bold tracking-wide text-[#1E3A8A]">
-              THS Consulting
+              THS IT Consulting
             </span>
           </div>
 
