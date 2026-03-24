@@ -16,12 +16,11 @@ export const metadata: Metadata = {
   title: "THS IT Consulting",
   description: "Where you can find your way",
   icons: {
-    icon: "/ths-logo.png",
-    shortcut: "/ths-logo.png",
-    apple: "/ths-logo.png",
+    icon: "/ths-logo-v2.png",
+    shortcut: "/ths-logo-v2.png",
+    apple: "/ths-logo-v2.png",
   },
 };
-
 
 export default function RootLayout({
   children,
